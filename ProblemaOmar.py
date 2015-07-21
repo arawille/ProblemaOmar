@@ -1,30 +1,26 @@
 import math
 
-def primos(m):
-	"""Devuelve los primos desde el 2 hasta m usando la Criba de Eratóstenes"""
-	criba = [[n,0] for n in range(2,m+1)]
-	i =0
-	while i <= m-2:
-		if criba[i][1] == 0:
-			for n in range(i+1, m-1):
-				if (criba[n][0] % criba[i][0]== 0) and (criba[n][1]==0):
-					criba[n][1]= 1
-		i+=1
 	
-	pr = [2]
-	for t in range(3,m+1):
-		if criba[t-2][1]==0:
-			pr.append(t)
+					
+class Problemas():
 
-	return pr		
-		
-			
+	def primos(self, m):
+		"""Devuelve los primos desde el 2 hasta m usando la Criba de Eratóstenes"""
+		criba = [[n,0] for n in range(2,m+1)]
+		i =0
+		while i <= m-2:
+			if criba[i][1] == 0:
+				for n in range(i+1, m-1):
+					if (criba[n][0] % criba[i][0]== 0) and (criba[n][1]==0):
+						criba[n][1]= 1
+			i+=1
+	
+		pr = [2]
+		for t in range(3,m+1):
+			if criba[t-2][1]==0:
+				pr.append(t)
 
-
-class Problemas:
-
-	def __init__(self):
-		self.var = [100000, 1777, 1855, 10**8, 3**37]
+		return pr	
 
 	def problema1(self):
 		pass
@@ -32,11 +28,26 @@ class Problemas:
 	def problema2(self):
 		pass
 	
-	def problema3(self):
-		pass
+	def problema3(self, m):
+		""" Devuelve una lista con todos los enteros n < m tales que n tiene exactamente dos divisores primos"""
+		pr = Problemas.primos(self,m)
+		c=0
+		resultado = [4]
+		for n in range(5,m+1):
+			aux = n
+			c =0
+			while not aux == 1:
+				for p in pr:
+					if (p < aux ) and (aux%p ==0):
+						c +=1
+						aux = aux/p
+					elif aux == p:
+						c += 1
+						aux = 1	
+			if c == 2:
+				resultado.append(n)
+
+		return resultado
 
 	def problema4(self):
-		pass
-
-m = 10**8
-print(primos(m))		
+		pass		
