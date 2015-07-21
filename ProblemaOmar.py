@@ -20,7 +20,26 @@ class Problemas():
 			if criba[t-2][1]==0:
 				pr.append(t)
 
-		return pr	
+		return pr
+
+	def fun(self, m):
+		if m==1:
+			return 1
+
+		elif m == 3:
+			return 3
+
+		elif m % 2 == 0:
+			m = m/2
+			return Problemas.fun(self,m)
+
+		elif (m % 4 == 1) and (m>1):
+			m = (m-1)/4
+			return (2*Problemas.fun(self,(2*m)+1)) - Problemas.fun(self,m)
+
+		else:
+			m = (m-3)/4
+			return (3*Problemas.fun(self,(2*m)+1)) - (2*Problemas.fun(self,m))		
 
 	def problema1(self):
 		pass
@@ -49,5 +68,16 @@ class Problemas():
 
 		return resultado
 
-	def problema4(self):
-		pass		
+	def problema4(self,m):
+		""" Devuelve el valor de S(m) como definido en el problema 4"""
+		n = (m // 4) -1
+		Sum = 0
+		for i in range(0,n+1):
+			Sum = Sum + (6*Problemas.fun(self,(2*n)+1)) - Problemas.fun(self,n)
+		
+		t = 4*m
+		while t<= m :
+			Sum = Sum + Problemas.fun(self,t)
+			t +=1
+
+		return Sum				
