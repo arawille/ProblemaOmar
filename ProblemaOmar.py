@@ -5,7 +5,8 @@ class Problemas():
 
     def primos(self, m):
         """Devuelve los primos desde el 2 hasta m usando la 
-        Criba de Eratóstenes"""
+        Criba de Eratóstenes.
+        """
         criba = [[n, 0] for n in range(2, m+1)]
         i = 0
         while i <= m-2:
@@ -23,6 +24,7 @@ class Problemas():
         return pr
 
     def fun(self, m):
+        """Esta es la función del problema 4."""
         if m == 1:
             return 1
 
@@ -42,45 +44,43 @@ class Problemas():
             return (3*Problemas.fun(self, (2*m)+1)) - \
                    (2*Problemas.fun(self, m))
 
-    def problema1(self):
+    def problema_1(self):
         pass
 
-    def problema2(self):
+    def problema_2(self):
         pass
 
-    def problema3(self, m):
+    def problema_3(self, m):
         """ Devuelve una lista con todos los enteros n < m tales que n tiene 
-        exactamente dos divisores primos"""
+        exactamente dos divisores primos.
+        """
         pr = Problemas.primos(self, m)
-        c = 0
+        contador = 0
         resultado = [4]
         for n in range(5, m+1):
             aux = n
-            c = 0
+            contador = 0
             while not aux == 1:
                 for p in pr:
-                    if (p < aux) and (aux % p == 0):
-                        c += 1
+                    if (p <= aux) and (aux % p == 0):
+                        contador += 1
                         aux = aux/p
-                    elif aux == p:
-                        c += 1
-                        aux = 1
-            if c == 2:
+            if contador == 2:
                 resultado.append(n)
 
         return resultado
 
-    def problema4(self, m):
-        """ Devuelve el valor de S(m) como definido en el problema 4"""
+    def problema_4(self, m):
+        """ Devuelve el valor de S(m) como definido en el problema 4."""
         n = (m // 4) - 1
         Sum = 0
         for i in range(0, n+1):
-            Sum = Sum + (6*Problemas.fun(self, (2*n)+1)) - \
+            Sum += (6*Problemas.fun(self, (2*n)+1)) - \
                 Problemas.fun(self, n)
 
         t = 4*m
         while t <= m:
-            Sum = Sum + Problemas.fun(self, t)
+            Sum += Problemas.fun(self, t)
             t += 1
 
         return Sum
