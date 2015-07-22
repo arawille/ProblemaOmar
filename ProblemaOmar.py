@@ -5,7 +5,7 @@ class Problemas():
 
     def primos(self, m):
         """Devuelve los primos desde el 2 hasta m usando la 
-        Criba de Eratóstenes.
+           Criba de Eratóstenes.
         """
         criba = [[n, 0] for n in range(2, m+1)]
         i = 0
@@ -47,12 +47,20 @@ class Problemas():
     def problema_1(self):
         pass
 
-    def problema_2(self):
-        pass
+    def problema_2(self, base, potencia, digitos=8):
+        """ Devuelve los ultimos digitos de la superpotencia 
+            base** potencia.
+        """
+        modulo = 10**digitos
+        resultado = (base**base) % modulo
+        while potencia > 0:
+            resultado = (resultado**base) % modulo
+            potencia -= 1
+        return resultado
 
     def problema_3(self, m):
         """ Devuelve una lista con todos los enteros n < m tales que n tiene 
-        exactamente dos divisores primos.
+            exactamente dos divisores primos.
         """
         pr = Problemas.primos(self, m)
         contador = 0
